@@ -17,7 +17,7 @@ void Grid::addData(int x, int y, int data, int* keyX, int* keyY)
 {
 	findBinKey(x, y, keyX, keyY);
 	LinkedList* bin = findBin(*keyX, *keyY);
-	Node* node = (Node*)malloc(sizeof(Node));
+	Node* node = new Node;
 	node->value = data;
 	
 	bin->addNodeToFront(node);
@@ -48,7 +48,7 @@ LinkedList* Grid::search(int x, int y, int width, int height)
 			{
 				if (!list->includes(currentNode->value))
 				{
-					Node* node = (Node*)malloc(sizeof(Node));
+					Node* node = new Node;
 					node->value = currentNode->value;
 					list->addNodeToFront(node);
 				}
