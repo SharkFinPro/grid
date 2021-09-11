@@ -19,7 +19,7 @@ void Grid::addData(int x, int y, int data, int* keyX, int* keyY)
 	LinkedList* bin = findBin(*keyX, *keyY);
 	Node* node = (Node*)malloc(sizeof(Node));
 	node->value = data;
-
+	
 	bin->addNodeToFront(node);
 }
 
@@ -30,21 +30,21 @@ void Grid::removeData(int keyX, int keyY, int id)
 }
 
 
-LinkedList* Grid::search(int x, int y, int width, int height) // x, y = top left of search box
+LinkedList* Grid::search(int x, int y, int width, int height)
 {
-	// Nested For loop, find bins in all x & y values, for loop increases by binsize.
-	LinkedList* list = (LinkedList*)malloc(sizeof(LinkedList));
-
+	LinkedList* list = new LinkedList;
+	
 	for (int i = x; i < x + width; i += binSize)
 	{
-		for (int j = y; j < j + height; j += binSize)
+		for (int j = y; j < y + height; j += binSize)
 		{
-			// loop through every value in bin
-			// -> while looping, check to see if list includes each value from the bin
-			//    -> if list already includes the value, return. otherwise, add to list.
-			Node* currentNode = findBin(i, j)->getHead();
+			int keyX = 0;
+			int keyY = 0;
+			findBinKey(i, j, &keyX, &keyY);
+			LinkedList* bin = findBin(keyX, keyY);
+			Node* currentNode = bin->getHead();
 
-			while (currentNode != nullptr)
+			for (int i = 0; i < bin->getSize(); i++)
 			{
 				if (!list->includes(currentNode->value))
 				{
@@ -52,9 +52,12 @@ LinkedList* Grid::search(int x, int y, int width, int height) // x, y = top left
 					node->value = currentNode->value;
 					list->addNodeToFront(node);
 				}
-				currentNode = currentNode->next;
-			}
 
+				if (currentNode->next != nullptr)
+				{
+					currentNode = currentNode->next;
+				}
+			}
 		}
 	}
 
@@ -71,15 +74,21 @@ void Grid::findBinKey(int x, int y, int* keyX, int* keyY)
 
 LinkedList* Grid::findBin(int keyX, int keyY)
 {
-	/*LinkedList* bin = data.at(keyX).at(keyY);
-	if (bin == NULL) {
-		bin = (LinkedList*)malloc(sizeof(LinkedList));
+	auto xSearch = data.find(keyX);
+	if (xSearch == data.end()) {
+		std::unordered_map<int, LinkedList*>* newMap = new std::unordered_map<int, LinkedList*>;
+		data.insert({ keyX, newMap });
+	}
+	
+	std::unordered_map<int, LinkedList*>* xVal = data.at(keyX);
+
+	auto ySearch = data.at(keyX)->find(keyY);
+	if (ySearch == xVal->end()) {
+		LinkedList* newList = new LinkedList();
+		xVal->insert({ keyY, newList });
 	}
 
-	return bin;*/
+	LinkedList* list = xVal->at(keyY);
 
-	auto search = data.find(keyX);
-	if (keyX == data.end()) {
-		//insert new data
-	}
+	return list;
 }

@@ -13,11 +13,13 @@ void LinkedList::addNodeToFront(Node* node)
 	if (headIsNull())
 	{
 		head = node;
+		size++;
 		return;
 	}
 
 	node->next = head;
 	head = node;
+	size++;
 };
 
 void LinkedList::removeData(int id)
@@ -67,6 +69,11 @@ bool LinkedList::includes(int value)
 	}
 
 	return false;
+}
+
+int LinkedList::getSize()
+{
+	return size;
 }
 
 /* Private Methods */

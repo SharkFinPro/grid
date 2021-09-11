@@ -21,4 +21,6 @@ public:
 	bool includes(int value);
 
 	Node* getHead();
+
+	int getSize();
 };

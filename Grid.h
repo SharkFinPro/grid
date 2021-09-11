@@ -6,7 +6,7 @@ class Grid
 {
 private:
 	int binSize;
-	std::unordered_map<int, std::unordered_map<int, LinkedList*>> data;
+	std::unordered_map<int, std::unordered_map<int, LinkedList*>*> data;
 
 	void findBinKey(int x, int y, int* keyX, int* keyY);
 	LinkedList* findBin(int keyX, int keyY);
