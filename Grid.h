@@ -6,17 +6,18 @@ class Grid
 {
 private:
 	int binSize;
-	std::unordered_map<int, std::unordered_map<int, LinkedList*>*> data;
+	std::unordered_map<int, std::unordered_map<int, LinkedList*>*> bins;
 
 	void findBinKey(int x, int y, int* keyX, int* keyY);
 	LinkedList* findBin(int keyX, int keyY);
 
 public:
 	Grid(int binSize);
-	void printGridSize();
 	
-	void addData(int x, int y, int data, int* keyX, int* keyY);
-	void removeData(int keyX, int keyY, int id);
+	void insertPoint(int x, int y, int id, int data, int* keyX, int* keyY);
+	void removePoint(int keyX, int keyY, int id);
 
 	LinkedList* search(int x, int y, int width, int height);
+
+	int getBinSize();
 };

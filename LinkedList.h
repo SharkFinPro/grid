@@ -1,7 +1,8 @@
 #pragma once
 
 typedef struct Node {
-	int value;
+	int id;
+	int data;
 	Node* next;
 } Node;
 
@@ -9,18 +10,16 @@ class LinkedList
 {
 private:
 	int size = 0;
-	Node* head;
+	Node* head = nullptr;
 
 	bool headIsNull();
 
 public:
-	LinkedList();
 	void addNodeToFront(Node* node);
-	void removeData(int id);
+	void removeNode(int id);
 
-	bool includes(int value);
+	bool includes(int id);
 
 	Node* getHead();
-
 	int getSize();
 };

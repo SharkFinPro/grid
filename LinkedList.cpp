@@ -3,26 +3,20 @@
 
 /* Public Methods */
 
-LinkedList::LinkedList()
-{
-	head = nullptr;
-}
-
 void LinkedList::addNodeToFront(Node* node)
 {
+	size++;
 	if (headIsNull())
 	{
 		head = node;
-		size++;
 		return;
 	}
 
 	node->next = head;
 	head = node;
-	size++;
 };
 
-void LinkedList::removeData(int id)
+void LinkedList::removeNode(int id)
 {
 	if (headIsNull())
 	{
@@ -31,17 +25,16 @@ void LinkedList::removeData(int id)
 
 	Node* lastNode = nullptr;
 	Node* currentNode = head;
-	while (currentNode->next != nullptr)
+	while (currentNode != nullptr)
 	{
-		if (currentNode->value == id) {
+		if (currentNode->id == id) {
+			size--;
 			if (lastNode == nullptr)
 			{
 				head = nullptr;
-				size--;
 				return;
 			}
 			lastNode->next = currentNode->next;
-			size--;
 			return;
 		}
 
@@ -50,12 +43,7 @@ void LinkedList::removeData(int id)
 	}
 };
 
-Node* LinkedList::getHead()
-{
-	return head;
-}
-
-bool LinkedList::includes(int value)
+bool LinkedList::includes(int id)
 {
 	if (headIsNull())
 	{
@@ -67,15 +55,21 @@ bool LinkedList::includes(int value)
 
 	while (currentNode != nullptr)
 	{
-		if (currentNode->value == value)
+		if (currentNode->id == id)
 		{
 			return true;
 		}
+
 		lastNode = currentNode;
 		currentNode = currentNode->next;
 	}
 
 	return false;
+}
+
+Node* LinkedList::getHead()
+{
+	return head;
 }
 
 int LinkedList::getSize()
