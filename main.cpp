@@ -14,12 +14,13 @@ int main() {
 	std::cout << "Includes id 1? : " << list->includes(1) << std::endl;
 	
 	grid.addData(100, 100, 1, &keyX, &keyY);
-
 	
 	list = grid.search(0, 0, 200, 200);
 	std::cout << "Includes id 1? : " << list->includes(1) << std::endl;
 
-	list = grid.search(-1000, -1000, 200, 200);
+	grid.removeData(keyX, keyY, 1);
+
+	list = grid.search(0, 0, 200, 200);
 	std::cout << "Includes id 1? : " << list->includes(1) << std::endl;
 
 	return 0;

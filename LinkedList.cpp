@@ -34,7 +34,14 @@ void LinkedList::removeData(int id)
 	while (currentNode->next != nullptr)
 	{
 		if (currentNode->value == id) {
+			if (lastNode == nullptr)
+			{
+				head = nullptr;
+				size--;
+				return;
+			}
 			lastNode->next = currentNode->next;
+			size--;
 			return;
 		}
 
