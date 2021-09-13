@@ -8,10 +8,10 @@ Grid::Grid(int binSize)
 	this->binSize = binSize;
 }
 
-void Grid::insertPoint(int x, int y, int id, int data, int* keyX, int* keyY)
+void Grid::insertPoint(int x, int y, int id, int data, int& keyX, int& keyY)
 {
 	findBinKey(x, y, keyX, keyY);
-	LinkedList* bin = findBin(*keyX, *keyY);
+	LinkedList* bin = findBin(keyX, keyY);
 	Node* node = new Node({ id, data, nullptr});
 	
 	bin->addNodeToFront(node);
@@ -33,7 +33,7 @@ LinkedList* Grid::search(int x, int y, int width, int height)
 		{
 			int keyX = 0;
 			int keyY = 0;
-			findBinKey(i, j, &keyX, &keyY);
+			findBinKey(i, j, keyX, keyY);
 			LinkedList* bin = findBin(keyX, keyY);
 			Node* currentNode = bin->getHead();
 
@@ -63,10 +63,10 @@ int Grid::getBinSize()
 
 /* Private Methods */
 
-void Grid::findBinKey(int x, int y, int* keyX, int* keyY)
+void Grid::findBinKey(int x, int y, int& keyX, int& keyY)
 {
-	*keyX = x / binSize;
-	*keyY = y / binSize;
+	keyX = x / binSize;
+	keyY = y / binSize;
 }
 
 LinkedList* Grid::findBin(int keyX, int keyY)

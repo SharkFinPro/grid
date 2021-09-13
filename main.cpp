@@ -18,7 +18,7 @@ int main() {
 	list = grid.search(0, 0, 200, 200);
 	printListIncludesId(1, list);
 	
-	grid.insertPoint(100, 100, 1, 5, &keyX, &keyY);
+	grid.insertPoint(100, 100, 1, 5, keyX, keyY);
 	
 	list = grid.search(0, 0, 200, 200);
 	printListIncludesId(1, list);
