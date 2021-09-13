@@ -3,7 +3,7 @@
 typedef struct Node {
 	int id;
 	int data;
-	Node* next;
+	Node* next = nullptr;
 } Node;
 
 class LinkedList

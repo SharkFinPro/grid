@@ -5,28 +5,27 @@
 
 void printListIncludesId(int id, LinkedList* list)
 {
-	std::cout << "Includes id " << id << "? : " << list->includes(id) << std::endl;
+	std::cout << std::boolalpha << "Includes id " << id << "? : " << list->includes(id) << std::endl;
 }
 
 int main() {
 	Grid grid = Grid(50);
-	int keyX = 0;
-	int keyY = 0;
+	int keyX, keyY;
 
-	LinkedList* list;
+	LinkedList* searchList;
 
-	list = grid.search(0, 0, 200, 200);
-	printListIncludesId(1, list);
+	searchList = grid.search(0, 0, 200, 200);
+	printListIncludesId(1, searchList);
 	
 	grid.insertPoint(100, 100, 1, 5, keyX, keyY);
 	
-	list = grid.search(0, 0, 200, 200);
-	printListIncludesId(1, list);
+	searchList = grid.search(0, 0, 200, 200);
+	printListIncludesId(1, searchList);
 
 	grid.removePoint(keyX, keyY, 1);
 
-	list = grid.search(0, 0, 200, 200);
-	printListIncludesId(1, list);
+	searchList = grid.search(0, 0, 200, 200);
+	printListIncludesId(1, searchList);
 
 	return 0;
 }
